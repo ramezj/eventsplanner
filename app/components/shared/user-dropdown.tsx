@@ -25,22 +25,11 @@ export function UserDropdown({ user }: UserDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          {user.image ? (
-            <Image
-              src={user.image}
-              alt={user.name}
-              width={16}
-              height={16}
-              className="rounded-full object-cover"
-            />
-          ) : (
-            <UserIcon />
-          )}
-          <span className="max-w-[12rem] truncate">{user.name}</span>
+        <Button variant="outline" className="w-full">
+        {user.name}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="start" className="dropdown-width-full">
         <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
