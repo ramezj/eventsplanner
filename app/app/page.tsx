@@ -1,11 +1,16 @@
 import { Button } from "@/components/ui/button"
+import Authenticate from "@/components/auth/authenticate"
+import { auth } from "@/auth"
+import { headers } from "next/headers"
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
   return (
     <>
-    <Button onClick={(() => {
-      
-    })} >Click Me</Button>
+      {JSON.stringify(session)}
+      <Authenticate />
     </>
   )
 }
