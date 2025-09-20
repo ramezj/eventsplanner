@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import Authenticate from "@/components/auth/authenticate"
 import { auth } from "@/auth"
 import { headers } from "next/headers"
+import { Navbar } from "@/components/shared/Navbar"
 
 export default async function Home() {
   const session = await auth.api.getSession({
@@ -9,7 +10,8 @@ export default async function Home() {
   })
   return (
     <>
-      {JSON.stringify(session)}
+    <Navbar />
+      {/* {JSON.stringify(session)} */}
       <Authenticate />
     </>
   )
