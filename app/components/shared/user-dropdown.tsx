@@ -24,7 +24,7 @@ interface UserDropdownProps {
 export function UserDropdown({ user }: UserDropdownProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className="cursor-pointer">
         <Button variant="outline" className="w-full">
         {user.name}
         </Button>

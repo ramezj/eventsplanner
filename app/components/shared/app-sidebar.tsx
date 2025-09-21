@@ -10,14 +10,12 @@ import {
   SidebarMenuItem,
   SidebarMenuButton
 } from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, } from "lucide-react"
 import { UserDropdown } from "./user-dropdown"
 import { getServerSession } from "@/lib/get-session"
 import { User } from "@/lib/generated/prisma"
 
-const items = [{ title: "Home",url: "#", icon: Home }, {title: "Inbox", url: "#", icon: Inbox }, 
-    { title: "Calendar", url: "#", icon: Calendar }, { title: "Search", url: "#", icon: Search},
-    { title: "Settings", url: "#", icon: Settings }]
+const items = [{ title: "Events", url: "#", icon: Calendar }]
 
 export async function AppSidebar() {
     const session = await getServerSession();
@@ -30,7 +28,7 @@ export async function AppSidebar() {
      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup />
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupLabel>Platform</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
