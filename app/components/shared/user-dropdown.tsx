@@ -24,12 +24,12 @@ interface UserDropdownProps {
 export function UserDropdown({ user }: UserDropdownProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="cursor-pointer">
+      <DropdownMenuTrigger asChild className="cursor-pointer rounded-none">
         <Button variant="outline" className="w-full">
         {user.name}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="dropdown-width-full">
+      <DropdownMenuContent align="start" className="dropdown-width-full rounded-none">
         <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>

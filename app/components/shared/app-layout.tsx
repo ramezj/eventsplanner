@@ -7,7 +7,6 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/com
 import { redirect, usePathname } from "next/navigation"
 import { Separator } from "../ui/separator"
 import { User } from "@/lib/generated/prisma"
-import { Session } from "@/lib/generated/prisma"
 import { UserDropdown } from "./user-dropdown"
 import { Menu } from "lucide-react"
 // import { OrganizationsDropdown } from "./dropdown-organizations"
@@ -21,64 +20,22 @@ export default function LayoutNavigation({ children, user }: { children: React.R
   const path = usePathname();
     return (
       <div className="grid min-h-screen w-full md:grid-cols-[200px_1fr] lg:grid-cols-[260px_1fr]">
-        <div className="hidden border-r border-foreground/20 border-dashed dark:bg-black bg-white md:block">
-          <div className="flex h-full max-h-screen flex-col gap-2 sticky top-0 z-50 dark:bg-black bg-white">
-            <div className="flex h-16 items-center border-b border-foreground/20 border-dashed dark:bg-black bg-white lg:h-16 text-center justify-center">
+        <div className="hidden border-r border-foreground/20 md:block">
+          <div className="flex h-full max-h-screen flex-col gap-2 sticky top-0 z-50">
+            <div className="flex h-16 items-center border-b border-foreground/20 lg:h-16 text-center justify-center">
             <Link href="/" className="flex items-center z-50">
-            <span className="text-2xl tracking-tight dark:text-white text-black font-extrabold">wegotwork</span>
+            <span className="text-2xl tracking-tight dark:text-white text-black font-extrabold">Events</span>
             </Link>
             </div>
             <div className="flex-1 ">
               <nav className="grid items-start px-3 text-sm font-bold gap-2 mt-1">
-                <Button asChild variant="ghost" className={` ${path.includes('/overview') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
+                <Button asChild variant="ghost" className={` ${path.includes('/dashboard') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
                   <Link href='/overview'>
                   <Home className="size-4" />
-                  Overview
+                  Dashboard
                   </Link>
-                </Button>
-                <Button asChild variant="ghost" className={` ${path.includes('/jobs') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                  <Link href='/jobs'>
-                  <Briefcase className="size-4" />
-                  Jobs
-                  </Link>
-                </Button>
-                <Button asChild variant="ghost" className={` ${path.includes('/applicants') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                <Link href='/applicants'>
-                <Users className="h-4 w-4" />
-                  Applicants
-                </Link>
-                </Button>
-                <Button asChild variant="ghost" className={` ${path.includes('/categories') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                <Link href='/categories'>
-                <Tags className="h-4 w-4" />
-                  Categories
-                </Link>
-                </Button>
-                <Button asChild variant="ghost" className={` ${path.includes('/billing') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                <Link href='/billing'>
-                <Banknote className="h-4 w-4" />
-                  Billing
-                </Link>
-                </Button>
-                <Button asChild variant="ghost" className={` ${path.includes('/members') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                <Link href='/members'>
-                <Users className="h-4 w-4" />
-                  Members
-                </Link>
-                </Button>
-                <Button asChild variant="ghost" className={` ${path.includes('/settings') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                <Link href='/settings'>
-                <Settings className="h-4 w-4" />
-                  Organization
-                </Link>
                 </Button>
                 <Separator />
-                <Button asChild variant="ghost" className={` ${path === '/me' ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
-                <Link href='/settings'>
-                <User2 className="h-4 w-4" />
-                  Account
-                </Link>
-                </Button>
               </nav>
             </div>
             <div className="p-4 w-full flex gap-2">
@@ -89,7 +46,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
           </div>
         </div>
         <div className="flex flex-col sticky">
-          <header className="z-50 flex h-16 items-center gap-4 border-b border-foreground/20 border-dashed dark:bg-black bg-white lg:h-16 sticky top-0">
+          <header className="z-50 flex h-16 items-center gap-4 border-b border-foreground/20 lg:h-16 sticky top-0">
             <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="shrink-0 md:hidden text-foreground p-11 hover:bg-transparent rounded-none -ml-4">
@@ -101,7 +58,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
               <SheetTitle>
                 <SheetClose asChild className="top-4">
                   <Link href="/" className="px-2 text-2xl tracking-tight text-black font-extrabold">
-                  <span className="text-2xl tracking-tight text-foreground font-extrabold">wegotwork</span>
+                  <span className="text-2xl tracking-tight text-foreground font-extrabold">Events</span>
                   </Link>
                   </SheetClose>
                 </SheetTitle>

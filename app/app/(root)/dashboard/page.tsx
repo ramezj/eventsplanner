@@ -8,9 +8,7 @@ export default async function Page() {
     return (
         <div className="flex flex-col space-y-4">
         <div>
-        <h1 className="text-lg font-semibold">
-        Hello {session.user.name}
-        </h1>
+        <h1 className="font-bold text-3xl tracking-tight text-foreground">Dashboard</h1>
         </div>
         <div>
         <h1>
