@@ -2,7 +2,7 @@
 
 import { User } from "@/lib/generated/prisma";
 import { authClient } from "@/lib/auth-client";
-import { LogOutIcon, ShieldIcon, UserIcon } from "lucide-react";
+import { ChevronsUpDown, LogOutIcon, ShieldIcon, UserIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,12 +21,13 @@ interface UserDropdownProps {
   user: User;
 }
 
-export function UserDropdown({ user }: UserDropdownProps) {
+export function EventsDropdown({ user }: UserDropdownProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="cursor-pointer rounded-none !border-foreground/10">
-        <Button variant="outline" className="w-full">
-        {user.name}
+      <DropdownMenuTrigger asChild>
+        <Button variant={"outline"} className="w-full rounded-none flex justify-between !border-foreground/10">
+        Event Name
+        <ChevronsUpDown className="size-4 ml-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="dropdown-width-full rounded-none">

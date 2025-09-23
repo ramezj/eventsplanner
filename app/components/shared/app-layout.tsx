@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { Home, Users, Banknote, Briefcase, Settings, Tags, User2 } from "lucide-react"
+import { Home, Users, Banknote, Briefcase, Settings, Tags, User2, Mail, UserIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
 import { redirect, usePathname } from "next/navigation"
@@ -9,6 +9,7 @@ import { Separator } from "../ui/separator"
 import { User } from "@/lib/generated/prisma"
 import { UserDropdown } from "./user-dropdown"
 import { Menu } from "lucide-react"
+import { EventsDropdown } from "./events-dropdown"
 // import { OrganizationsDropdown } from "./dropdown-organizations"
 // import { DropdownAvatar } from "./dropdown-avatar"
 
@@ -20,12 +21,13 @@ export default function LayoutNavigation({ children, user }: { children: React.R
   const path = usePathname();
     return (
       <div className="grid min-h-screen w-full md:grid-cols-[200px_1fr] lg:grid-cols-[260px_1fr]">
-        <div className="hidden border-r border-foreground/20 md:block">
+        <div className="hidden border-r border-foreground/10 md:block">
           <div className="flex h-full max-h-screen flex-col gap-2 sticky top-0 z-50">
-            <div className="flex h-16 items-center border-b border-foreground/20 lg:h-16 text-center justify-center">
-            <Link href="/" className="flex items-center z-50">
+            <div className="flex h-16 border-b border-foreground/10 lg:h-16 p-4">
+            {/* <Link href="/" className="flex items-center z-50">
             <span className="text-2xl tracking-tight dark:text-white text-black font-extrabold">Events</span>
-            </Link>
+            </Link> */}
+            <EventsDropdown user={user} />
             </div>
             <div className="flex-1 ">
               <nav className="grid items-start px-3 text-sm font-bold gap-2 mt-1">
@@ -35,7 +37,19 @@ export default function LayoutNavigation({ children, user }: { children: React.R
                   Dashboard
                   </Link>
                 </Button>
+                <Button asChild variant="ghost" className={` ${path.includes('/mailing') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
+                  <Link href='/overview'>
+                  <Mail className="size-4" />
+                  Mailing
+                  </Link>
+                </Button>
                 <Separator />
+                <Button asChild variant="ghost" className={` ${path.includes('/mailing') ? "dark:bg-accent bg-gray-200" : ""} dark:hover:bg-accent hover:bg-gray-200 font-bold !text-start justify-start w-full rounded-none`}>
+                  <Link href='/overview'>
+                  <UserIcon className="size-4" />
+                  Account
+                  </Link>
+                </Button>
               </nav>
             </div>
             <div className="p-4 w-full flex gap-2">
@@ -46,7 +60,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
           </div>
         </div>
         <div className="flex flex-col sticky">
-          <header className="z-50 flex h-16 items-center gap-4 border-b border-foreground/20 lg:h-16 sticky top-0">
+          <header className="z-50 flex h-16 items-center gap-4 border-b border-foreground/10 lg:h-16 sticky top-0">
             <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="shrink-0 md:hidden text-foreground p-11 hover:bg-transparent rounded-none -ml-4">
