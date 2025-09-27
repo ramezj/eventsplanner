@@ -1,7 +1,11 @@
+import { CreateEventButton } from "@/components/shared/create-event";
+import { Button } from "@/components/ui/button";
 import { getServerSession } from "@/lib/get-session"
+import { CreateEvent } from "@/server-actions/event/create-event";
 
 export default async function Page() {
     const session = await getServerSession();
+    console.log(session);
     if (!session?.user) { 
         return <div>Please sign in to access the dashboard.</div>
     }
@@ -12,8 +16,9 @@ export default async function Page() {
         </div>
         <div>
         <h1>
-            My Events
+        {session.user.currentEvent?.name}
         </h1>
+        <CreateEventButton />
         </div>
         </div>
     )

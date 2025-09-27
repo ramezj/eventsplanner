@@ -1,9 +1,7 @@
 "use client";
 
-import { User } from "@/lib/generated/prisma";
 import { authClient } from "@/lib/auth-client";
-import { ChevronsUpDown, LogOutIcon, ShieldIcon, UserIcon } from "lucide-react";
-import Image from "next/image";
+import { ChevronsUpDown, LogOutIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -16,12 +14,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Session } from "@/lib/auth-client";
 
-interface UserDropdownProps {
-  user: User;
-}
-
-export function EventsDropdown({ user }: UserDropdownProps) {
+export function EventsDropdown({ session }: { session: Session }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,7 +26,7 @@ export function EventsDropdown({ user }: UserDropdownProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="dropdown-width-full rounded-none">
-        <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+        <DropdownMenuLabel>{session.user.currentEvent?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/profile">

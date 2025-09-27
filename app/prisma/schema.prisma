@@ -16,30 +16,56 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  events        Event[]
+  id                    String             @id
+  name                  String
+  email                 String
+  emailVerified         Boolean
+  image                 String?
+  createdAt             DateTime
+  updatedAt             DateTime
+  isPremium             Boolean            @default(false)
+  sessions              Session[]
+  accounts              Account[]
+  userEvents            EventUser[]
+  currentEventId        String?
+  currentEvent          Event?      @relation(fields: [currentEventId], references: [id], onDelete: SetNull)
   @@unique([email])
   @@map("user")
 }
 
 model Event {
-  id          String   @id
-  title       String
-  description String?
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  date        DateTime
-  location    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
+  id          String               @id @default(cuid())
+  name        String
+  slug        String               @unique
+  description String               @default("")
+  website     String?
+  premium     Boolean              @default(false)
+  users       EventUser[]
+  invitations EventInvite[]
+  User        User[]
+}
+
+model EventUser {
+  id             String       @id @default(cuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           Role         @default(member)
+  eventId String
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  owner
+  member
+}
+
+model EventInvite {
+  id             String       @id @default(cuid())
+  role           Role         @default(member)
+  email          String       
+  eventId String
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
 }
 
 model Session {

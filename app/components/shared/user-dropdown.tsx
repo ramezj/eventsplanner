@@ -1,9 +1,7 @@
 "use client";
 
-import { User } from "@/lib/generated/prisma";
 import { authClient } from "@/lib/auth-client";
-import { LogOutIcon, ShieldIcon, UserIcon } from "lucide-react";
-import Image from "next/image";
+import { LogOutIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -16,25 +14,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Session } from "@/lib/auth-client";
 
-interface UserDropdownProps {
-  user: User;
-}
-
-export function UserDropdown({ user }: UserDropdownProps) {
+export function UserDropdown({ session }: { session: Session }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer rounded-none !border-foreground/10">
         <Button variant="outline" className="w-full">
-        {user.name}
+        {session?.user.name}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="dropdown-width-full rounded-none">
-        <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+        <DropdownMenuLabel>{session?.user.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/profile">
-            <UserIcon className="size-4" /> <span>Profile</span>
+          <Link href="/dashboard">
+            <UserIcon className="size-4" /> <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
         <SignOutItem />

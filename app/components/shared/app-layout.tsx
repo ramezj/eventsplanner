@@ -10,12 +10,14 @@ import { User } from "@/lib/generated/prisma"
 import { UserDropdown } from "./user-dropdown"
 import { Menu } from "lucide-react"
 import { EventsDropdown } from "./events-dropdown"
+import { DropdownAvatar } from "./avatar-dropdown"
+import { Session } from "@/lib/auth-client"
 // import { OrganizationsDropdown } from "./dropdown-organizations"
 // import { DropdownAvatar } from "./dropdown-avatar"
 
 
-export default function LayoutNavigation({ children, user }: { children: React.ReactNode; user: User }) {
-  if(!user) {
+export default function LayoutNavigation({ children, session }: { children: React.ReactNode; session: Session }) {
+  if(!session) {
     redirect('/');
   } 
   const path = usePathname();
@@ -27,7 +29,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
             {/* <Link href="/" className="flex items-center z-50">
             <span className="text-2xl tracking-tight dark:text-white text-black font-extrabold">Events</span>
             </Link> */}
-            <EventsDropdown user={user} />
+            <EventsDropdown session={session}/>
             </div>
             <div className="flex-1 ">
               <nav className="grid items-start px-3 text-sm font-bold gap-2 mt-1">
@@ -54,7 +56,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
             </div>
             <div className="p-4 w-full flex gap-2">
               {/* <NavUser session={session} /> */}
-              <UserDropdown user={user} />
+              <UserDropdown session={session}/>
               {/* <DropDownMenuUser session={session} /> */}
             </div>
           </div>
@@ -136,7 +138,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
                   </SheetClose>
                 </nav>
                 <div className="w-full flex gap-2 pt-4 bottom-0 mt-auto">
-                <UserDropdown user={user}/>
+                <UserDropdown session={session}/>
               </div>
               </SheetContent>
             </Sheet>
@@ -147,7 +149,7 @@ export default function LayoutNavigation({ children, user }: { children: React.R
               </>
               } */}
               {/* <ModeToggle /> */}
-              <UserDropdown user={user}/>
+              <DropdownAvatar session={session as Session}/>
             </div> 
           </header>
             {children}

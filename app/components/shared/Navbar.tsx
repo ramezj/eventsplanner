@@ -6,12 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { UserDropdown } from "./user-dropdown";
-import { User } from "@/lib/generated/prisma";
+import { Session } from "@/lib/auth-client";
 
 export async function Navbar() {
   const session = await getServerSession();
-  const user = session?.user;
-  if (!user) return null;
+  if (!session) return null;
   return (
     <header className="bg-background border-b">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -22,7 +21,7 @@ export async function Navbar() {
           Better-Auth Tutorial
         </Link>
         <div className="flex items-center gap-2">
-        <UserDropdown user={user as User} />
+        <UserDropdown session={session as Session} />
           {/* <ModeToggle />
           <UserDropdown user={user} /> */}
         </div>
