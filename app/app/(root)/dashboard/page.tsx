@@ -14,7 +14,7 @@ export default async function Page() {
     return (
         <>
         <div className="flex justify-between items-center w-full">
-        <h1 className="font-extrabold text-3xl tracking-tight text-foreground">Overview</h1>
+        <h1 className="font-bold text-3xl tracking-tight text-foreground">Dashboard</h1>
         <Button asChild variant={"outline"}>
         <Link target="_blank" href={`http://${session?.user.currentEvent?.slug}.${process.env.NEXT_PUBLIC_URL}`}>
         {/* <SquareArrowOutUpRight className="size-4" /> */}
