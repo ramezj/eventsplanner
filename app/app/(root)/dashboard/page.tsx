@@ -2,24 +2,26 @@ import { CreateEventButton } from "@/components/shared/create-event";
 import { Button } from "@/components/ui/button";
 import { getServerSession } from "@/lib/get-session"
 import { CreateEvent } from "@/server-actions/event/create-event";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 export default async function Page() {
     const session = await getServerSession();
-    console.log(session);
     if (!session?.user) { 
-        return <div>Please sign in to access the dashboard.</div>
+        return redirect('/auth')
     }
     return (
-        <div className="flex flex-col space-y-4">
-        <div>
-        <h1 className="font-bold text-3xl tracking-tight text-foreground">Dashboard</h1>
+        <>
+        <div className="flex justify-between items-center w-full">
+        <h1 className="font-extrabold text-3xl tracking-tight text-foreground">Overview</h1>
+        <Button asChild variant={"outline"}>
+        <Link target="_blank" href={`http://${session?.user.currentEvent?.slug}.${process.env.NEXT_PUBLIC_URL}`}>
+        {/* <SquareArrowOutUpRight className="size-4" /> */}
+        Preview Event
+        </Link>
+        </Button>
         </div>
-        <div>
-        <h1>
-        {session.user.currentEvent?.name}
-        </h1>
-        <CreateEventButton />
-        </div>
-        </div>
+        </>
     )
 }
